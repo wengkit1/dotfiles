@@ -1,0 +1,22 @@
+[core]
+	excludesfile = /Users/soowengkit/.gitignore_global
+[user]
+	name = wengkit1
+	email = e0686150@u.nus.edu
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[http]
+	postbuffer = 104857600
+[pull]
+	rebase = true
+[branch]
+	autosetupmerge = always
+[checkout]
+	defaultRemote = origin
+[color]
+	ui = true
+[init]
+	defautlBranch = main

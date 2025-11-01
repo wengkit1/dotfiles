@@ -1,0 +1,38 @@
+format = """
+[$directory\
+{](bold green)\
+$git_branch\
+$python\
+$aws\
+[}](bold green)
+$character"""
+
+# Directory configuration - shows full path
+[directory]
+style = "bold blue"
+truncation_length = 0  # Don't truncate, show full path
+truncate_to_repo = false  # Show full path even in git repos
+home_symbol = "~"
+
+# Git branch with new symbol
+[git_branch]
+symbol = "🌿 "
+style = "bold red"
+format = " on [$symbol$branch]($style)"
+
+# Python module
+[python]
+symbol = "🐍"
+style = "bold yellow"
+format = " via [$symbol$pyname $version]($style)"
+
+# AWS module
+[aws]
+symbol = "☁️ "
+style = "bold cyan"
+format = " on [$symbol($profile )($region)]($style)"
+
+# Character (prompt symbol)
+[character]
+success_symbol = "[❯](bold purple)"
+error_symbol = "[❯](bold red)"
