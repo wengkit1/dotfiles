@@ -35,11 +35,21 @@ tools=(
   "stow"
   "tmux"
   "ncspot"
+  "ghostty"
+  "ripgrep"
+  "fd"
+  "git-lfs"
+  "node"
+  "python@3.12"
 )
 
 for tool in "${tools[@]}"; do
   brew list "$tool" &>/dev/null || brew install "$tool"
 done
+
+# Install fonts
+echo "Installing fonts..."
+brew install --cask font-jetbrains-mono-nerd-font 2>/dev/null || true
 
 # Install mambaforge
 if [ ! -d "$HOME/mambaforge" ]; then
