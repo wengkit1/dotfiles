@@ -52,12 +52,12 @@ echo "Installing fonts..."
 brew install --cask font-jetbrains-mono-nerd-font 2>/dev/null || true
 
 # Install mambaforge
-#if [ ! -d "$HOME/mambaforge" ]; then
-#  echo "Installing mambaforge..."
-#  curl -L -o "~/mambaforge.sh" "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-MacOSX-arm64.sh"
-#  bash "~/mambaforge.sh" -b -p "$HOME/mambaforge"
-#  rm "~/mambaforge.sh"
-#fi
+if [ ! -d "$HOME/miniforge3" ]; then
+  echo "Installing miniforge3..."
+  curl -L -o "$HOME/miniforge.sh" "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh"
+  bash "$HOME/miniforge.sh" -b -p "$HOME/miniforge"
+  rm "$HOME/miniforge.sh"
+fi
 
 # Set up fzf
 [ ! -f "$HOME/.fzf.zsh" ] && $(brew --prefix)/opt/fzf/install --key-bindings --completion --no-update-rc
@@ -102,20 +102,19 @@ if [ -d "$HOME/mambaforge" ] && ! grep -q "conda initialize" "$HOME/.zshrc"; the
   cat >>"$HOME/.zshrc" <<'EOF'
 
 # >>> conda initialize >>>
-__conda_setup="$('$HOME/mambaforge/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('$HOME/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "$HOME/mambaforge/etc/profile.d/conda.sh" ]; then
-        . "$HOME/mambaforge/etc/profile.d/conda.sh"
+    if [ -f "$HOME/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "$HOME/miniforge3/etc/profile.d/conda.sh"
     else
-        export PATH="$HOME/mambaforge/bin:$PATH"
+        export PATH="$HOME/miniforge3/bin:$PATH"
     fi
 fi
 unset __conda_setup
-
-if [ -f "$HOME/mambaforge/etc/profile.d/mamba.sh" ]; then
-    . "$HOME/mambaforge/etc/profile.d/mamba.sh"
+if [ -f "$HOME/miniforge3/etc/profile.d/mamba.sh" ]; then
+    . "$HOME/miniforge3/etc/profile.d/mamba.sh"
 fi
 # <<< conda initialize <<<
 EOF
