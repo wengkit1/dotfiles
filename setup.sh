@@ -55,8 +55,11 @@ brew install --cask font-jetbrains-mono-nerd-font 2>/dev/null || true
 if [ ! -d "$HOME/miniforge3" ]; then
   echo "Installing miniforge3..."
   curl -L -o "$HOME/miniforge.sh" "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh"
-  bash "$HOME/miniforge.sh" -b -p "$HOME/miniforge"
+  bash "$HOME/miniforge.sh" -b -p "$HOME/miniforge3"
   rm "$HOME/miniforge.sh"
+
+  # This handles everything
+  "$HOME/miniforge3/bin/conda" init zsh
 fi
 
 # Set up fzf
@@ -94,29 +97,6 @@ source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 bindkey '\ec' fzf-cd-widget
-EOF
-fi
-
-# Add conda initialization if not present
-if [ -d "$HOME/mambaforge" ] && ! grep -q "conda initialize" "$HOME/.zshrc"; then
-  cat >>"$HOME/.zshrc" <<'EOF'
-
-# >>> conda initialize >>>
-__conda_setup="$('$HOME/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "$HOME/miniforge3/etc/profile.d/conda.sh" ]; then
-        . "$HOME/miniforge3/etc/profile.d/conda.sh"
-    else
-        export PATH="$HOME/miniforge3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-if [ -f "$HOME/miniforge3/etc/profile.d/mamba.sh" ]; then
-    . "$HOME/miniforge3/etc/profile.d/mamba.sh"
-fi
-# <<< conda initialize <<<
 EOF
 fi
 
