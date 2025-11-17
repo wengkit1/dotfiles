@@ -52,12 +52,12 @@ echo "Installing fonts..."
 brew install --cask font-jetbrains-mono-nerd-font 2>/dev/null || true
 
 # Install mambaforge
-if [ ! -d "$HOME/mambaforge" ]; then
-  echo "Installing mambaforge..."
-  curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
-  bash "Mambaforge-$(uname)-$(uname -m).sh" -b -p "$HOME/mambaforge"
-  rm "Mambaforge-$(uname)-$(uname -m).sh"
-fi
+#if [ ! -d "$HOME/mambaforge" ]; then
+#  echo "Installing mambaforge..."
+#  curl -L -o "~/mambaforge.sh" "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-MacOSX-arm64.sh"
+#  bash "~/mambaforge.sh" -b -p "$HOME/mambaforge"
+#  rm "~/mambaforge.sh"
+#fi
 
 # Set up fzf
 [ ! -f "$HOME/.fzf.zsh" ] && $(brew --prefix)/opt/fzf/install --key-bindings --completion --no-update-rc
@@ -122,4 +122,3 @@ EOF
 fi
 
 echo "Setup complete. Restart shell or run: source ~/.zshrc"
-
